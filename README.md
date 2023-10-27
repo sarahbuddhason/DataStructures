@@ -1,8 +1,8 @@
 # Data Structures
 
 1. [Graphs](#graphs)
-   1.1 [Adjacency Matrix](#adjacency-matrix)
-   1.2 [Adjacency List](#adjacency-list)
+   - 1.1 [Adjacency Matrix](#adjacency-matrix)
+   - 1.2 [Adjacency List](#adjacency-list)
 
 2. [Priority Queue](#priority-queue)
 
