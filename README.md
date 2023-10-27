@@ -11,12 +11,12 @@
 - **Applications**:
   - **Dijkstra’s Shortest Path**.
 
-- **Time Complexity** (Binary Heap):
+- **Time** (Binary Heap):
   - **Insertion**: O(log n)
   - **Deletion**: O(log n)
   - **Building a heap**: O(n)
 
-- **Space Complexity**: O(n).
+- **Space**: O(n).
 
 ```
 #include <queue>
