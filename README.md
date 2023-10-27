@@ -1,4 +1,4 @@
-## Undirected & Directed Graphs
+## Graphs
 
 **1. Adjacency Matrix**
 - 2D array of size VxV (V: number of vertices).
