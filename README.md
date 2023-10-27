@@ -1,6 +1,6 @@
 # Data Structures
 
-1. [Graphs](#graphs)
+1. [Graph](#graph)
    - 1.1 [Adjacency Matrix](#adjacency-matrix)
    - 1.2 [Adjacency List](#adjacency-list)
 
@@ -8,17 +8,17 @@
 
 3. [Heap](#heap)
 
-4. [Linked Lists](#linked-lists)
+4. [Linked List](#linked-list)
 
 5. [Hash Table](#hash-table)
 
 6. [Hash Map](#hash-map)
 
-7. [Dictionaries](#dictionaries)
+7. [Dictionary](#dictionary)
 
 ---
 
-## Graphs
+## Graph
 
 ### Adjacency Matrix
 
@@ -69,14 +69,13 @@ void addEdgeDirected(int u, int v) {
 
 ## Priority Queue
 
-- **Definition**: A data structure that maintains elements based on their priority. High-priority elements are dequeued before lower ones.
+- **Definition**: Maintains elements based on their priority. High-priority elements are dequeued before lower ones.
 - **Implementation**:
-  - Arrays/Linked Lists: Not efficient for insertion/deletion.
-  - Binary Heaps: Can be max-heap (high priority on top) or min-heap (low priority on top).
-  - Balanced Binary Search Trees: Such as AVL or Red-Black trees.
-  - Fibonacci Heaps: Have better average-case times for certain operations.
-- **Applications**:
-  - Dijkstra’s Shortest Path.
+  - Arrays/Linked Lists: Not efficient.
+  - Binary Heaps: Max-heap or min-heap.
+  - Balanced Binary Trees: AVL or Red-Black trees.
+  - Fibonacci Heaps: Better average-case times for some operations.
+- **Key Application**: Dijkstra’s Shortest Path.
 - **Time (Using Binary Heap)**:
   - **Insertion**: O(log n)
   - **Deletion**: O(log n)
@@ -94,16 +93,15 @@ std::priority_queue<int, std::vector<int>, std::greater<int>> minPQ; // Min Heap
 
 ## Heap
 
-- **Description**: A complete binary tree.
-- **Types**: Mainly max heap and min heap.
-- **Use**: Often used for implementing priority queues.
+- **Definition**: A complete binary tree.
+- **Types**: Max heap and min heap.
 - **Applications**:
-  1. Priority Queues: To fetch the highest/lowest priority element.
-  2. Heap Sort: To sort in O(n log n) time.
-  3. Kth Largest/Smallest Element: Done in O(n log k) time.
-  4. Merging K Sorted Lists: Achieved in O(n log k) time.
-  5. Dijkstra's Algorithm: To select the closest vertex.
-  6. Load Balancing: For executing high-priority tasks.
+   - Priority Queues: To fetch the highest/lowest priority element.
+   - Heap Sort: O(n log n).
+   - Kth Largest/Smallest Element: O(n log n).
+   - Merging K Sorted Lists: O(n log n).
+   - Dijkstra's Algorithm: To select the closest vertex.
+   - Load Balancing: For executing high-priority tasks.
 - **Time**:
   - **Insertion**: O(log n)
   - **Pop**: O(log n)
@@ -112,18 +110,18 @@ std::priority_queue<int, std::vector<int>, std::greater<int>> minPQ; // Min Heap
 
 ---
 
-## Linked Lists
+## Linked List
 
-- **Description**: A linear data structure comprised of nodes linked sequentially.
+- **Definition**: Linear structure of sequentially linked nodes.
 - **Types**: Single Linked List (SLL) & Doubly Linked List (DLL).
 - **Time (SLL)**:
   - **Insertion**: Head: O(1), Tail: O(n), Middle: O(n)
   - **Deletion**: Head: O(1), Tail: O(n), Middle: O(n)
-  - **Access/Search**: O(n)
+  - **Access, Search**: O(n)
 - **Time (DLL)**:
   - **Insertion**: Head: O(1), Tail: O(1), Middle: O(n)
   - **Deletion**: Head: O(1), Tail: O(1), Middle: O(n)
-  - **Access/Search**: O(n)
+  - **Access, Search**: O(n)
 - **Space**: O(n)
 
 ```cpp
@@ -139,31 +137,25 @@ void traverse(Node* head) {
 
 ## Hash Table
 
-- **Description**: Conversion of data into a fixed-size array index (hashing).
-  
-**Collisions**:
-- Occurrences when two distinct keys produce the same hash value. 
-- Resolutions are required for accurate data retrieval.
-
-**Chaining**:
-- A technique employed to handle collisions.
-- Each index in the table points to a list of all values that hash to that specific index.
-
-**Applications**:
-
-- **Data Retrieval**: Fast lookups (e.g., database indexing).
-- **Caching**: Store temporary data (e.g., web server cache).
-- **Frequency Count**: Count items (e.g., character frequency in strings).
-- **Disjoint Set**: Track non-overlapping subsets (e.g., network connectivity).
-- **Substring Search**: Quickly find or match substrings (e.g., in text analysis).
-- **Unique Data**: Remove duplicates from a dataset.
-- **Associative Arrays**: Map keys to values (e.g., dictionary implementations).
-
-**Time**:
-- O(n) for collisions
-- O(1) otherwise
-
-**Space**: O(n)
+- **Definition**: Transforms data into a fixed-size array index via hashing.
+- **Collisions**:
+   - Arises when two distinct keys produce the same hash value. 
+   - Resolutions are required for accurate data retrieval.
+- **Chaining**:
+   - A technique employed to handle collisions.
+   - Each index maps to a list of values hashed to that index.
+- **Applications**:
+   - **Data Retrieval**: Fast lookups.
+   - **Caching**: Store temporary data.
+   - **Frequency Count**: Count items.
+   - **Disjoint Set**: Track non-overlapping subsets.
+   - **Substring Search**: Quickly find or match substrings.
+   - **Unique Data**: Remove duplicates from a dataset.
+   - **Associative Arrays**: Map keys to values.
+- **Time**:
+   - O(n) for collisions
+   - O(1) otherwise
+- **Space**: O(n)
 
 ```cpp
 const int TABLE_SIZE = 100;
@@ -199,13 +191,11 @@ public:
 
 ## Hash Map
 
-- Implementation of a hash table.
-
-**Time**:
-- O(n) for collisions
-- O(1) otherwise
-
-**Space**: O(n)
+- **Description**: Implementation of a hash table.
+- **Time**:
+   - O(n) for collisions
+   - O(1) otherwise
+- **Space**: O(n)
 
 ```cpp
 #include <unordered_map> // A Hash Table
@@ -215,15 +205,12 @@ std::unordered_map<int, std::string> hashMap;
 
 ---
 
-## Dictionaries
-- Collection of key-value pairs.
-- Keys are unique.
-
-**Time**:
-- O(n) for collisions
-- O(1) otherwise
-
-**Space**: O(n)
+## Dictionary
+- **Definition**: Collection of key-value pairs where keys are unique.
+- **Time**:
+   - O(n) for collisions
+   - O(1) otherwise
+- **Space**: O(n)
 
 ```cpp
 #include <map> // A balanced BST, not a Hash Table
