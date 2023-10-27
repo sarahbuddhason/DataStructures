@@ -14,6 +14,8 @@
 
 6. [Hash Map](#hash-map)
 
+7. [Dictionaries](#dictionaries)
+
 ---
 
 ## Graphs
@@ -195,7 +197,7 @@ public:
 
 ---
 
-##Hash Map
+## Hash Map
 
 - Implementation of a hash table.
 
@@ -213,7 +215,7 @@ std::unordered_map<int, std::string> hashMap;
 
 ---
 
-**Dictionaries**:
+## Dictionaries
 - Collection of key-value pairs.
 - Keys are unique.
 
