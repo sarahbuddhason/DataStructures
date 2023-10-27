@@ -1,4 +1,4 @@
-## Graph
+## Undirected & Directed Graphs
 
 **1. Adjacency Matrix**
 - 2D array of size VxV (V: number of vertices).
@@ -10,10 +10,18 @@
 int V = 5;
 vector<vector<int>> matrix(V, vector<int>(V, 0));
 
-// Add edge from vertex u to vertex v
-void addEdge(int u, int v) {
+void addEdgeUndirected(int u, int v) {
     matrix[u][v] = 1;
-    matrix[v][u] = 1;  // For undirected graph
+    matrix[v][u] = 1;
+}
+```
+
+```
+int V = 5;
+vector<vector<int>> matrix(V, vector<int>(V, 0));
+
+void addEdgeDirected(int u, int v) {
+    matrix[u][v] = 1;
 }
 ```
 
@@ -27,10 +35,18 @@ void addEdge(int u, int v) {
 int V = 5;
 vector<vector<int>> adjList(V);
 
-// Add edge from vertex u to vertex v
-void addEdge(int u, int v) {
+void addEdgeUndirected(int u, int v) {
     adjList[u].push_back(v);
-    adjList[v].push_back(u);  // For undirected graph
+    adjList[v].push_back(u);
+}
+```
+
+```
+int V = 5;
+vector<vector<int>> adjList(V);
+
+void addEdgeDirected(int u, int v) {
+    adjList[u].push_back(v);
 }
 ```
 
