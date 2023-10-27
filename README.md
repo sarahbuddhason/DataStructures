@@ -1,11 +1,29 @@
+# Data Structures
+
+1. [Graphs](#graphs)
+   1.1 [Adjacency Matrix](#adjacency-matrix)
+   1.2 [Adjacency List](#adjacency-list)
+
+2. [Priority Queue](#priority-queue)
+
+3. [Heap](#heap)
+
+4. [Linked Lists](#linked-lists)
+
+5. [Hash Table](#hash-table)
+
+6. [Hash Map](#hash-map)
+
+---
+
 ## Graphs
 
 ### Adjacency Matrix
 
-- Representation: 2D array of size VxV (where V is the number of vertices).
+- **Representation**: 2D array of size VxV (where V is the number of vertices).
 - `m[i][j] = 1` indicates an edge; otherwise, it's `0`.
+- **Time**: O(1)
 - **Space**: O(V^2)
-- **Access/Check Edge**: O(1)
 
 ```cpp
 int V = 5;
@@ -16,9 +34,6 @@ void addEdgeUndirected(int u, int v) {
     matrix[v][u] = 1;
 }
 
-int V = 5;
-vector<vector<int>> matrix(V, vector<int>(V, 0));
-
 void addEdgeDirected(int u, int v) {
     matrix[u][v] = 1;
 }
@@ -26,10 +41,10 @@ void addEdgeDirected(int u, int v) {
 
 ### Adjacency List
 
-- Representation: Array of lists, each of size V.
+- **Representation**: Array of lists, each of size V.
 - `list[i]` contains all vertices adjacent to vertex i.
+- **Time**: O(deg(v))
 - **Space**: O(V + E)
-- **Access/Check Edge**: O(deg(v))
 
 ```cpp
 int V = 5;
@@ -94,3 +109,123 @@ std::priority_queue<int, std::vector<int>, std::greater<int>> minPQ; // Min Heap
 - **Space**: O(n)
 
 ---
+
+## Linked Lists
+
+- **Description**: A linear data structure comprised of nodes linked sequentially.
+- **Types**: Single Linked List (SLL) & Doubly Linked List (DLL).
+- **Time (SLL)**:
+  - **Insertion**: Head: O(1), Tail: O(n), Middle: O(n)
+  - **Deletion**: Head: O(1), Tail: O(n), Middle: O(n)
+  - **Access/Search**: O(n)
+- **Time (DLL)**:
+  - **Insertion**: Head: O(1), Tail: O(1), Middle: O(n)
+  - **Deletion**: Head: O(1), Tail: O(1), Middle: O(n)
+  - **Access/Search**: O(n)
+- **Space**: O(n)
+
+```cpp
+void traverse(Node* head) {
+    while (head) {
+        std::cout << head->data << " ";
+        head = head->next;
+    }
+}
+```
+
+---
+
+## Hash Table
+
+- **Description**: Conversion of data into a fixed-size array index (hashing).
+  
+**Collisions**:
+- Occurrences when two distinct keys produce the same hash value. 
+- Resolutions are required for accurate data retrieval.
+
+**Chaining**:
+- A technique employed to handle collisions.
+- Each index in the table points to a list of all values that hash to that specific index.
+
+**Applications**:
+
+- **Data Retrieval**: Fast lookups (e.g., database indexing).
+- **Caching**: Store temporary data (e.g., web server cache).
+- **Frequency Count**: Count items (e.g., character frequency in strings).
+- **Disjoint Set**: Track non-overlapping subsets (e.g., network connectivity).
+- **Substring Search**: Quickly find or match substrings (e.g., in text analysis).
+- **Unique Data**: Remove duplicates from a dataset.
+- **Associative Arrays**: Map keys to values (e.g., dictionary implementations).
+
+**Time**:
+- O(n) for collisions
+- O(1) otherwise
+
+**Space**: O(n)
+
+```cpp
+const int TABLE_SIZE = 100;
+
+class HashTable {
+    std::vector<std::list<int>> table;
+
+public:
+    HashTable() : table(TABLE_SIZE) {}
+
+    int hashFunction(int key) {
+        return key % TABLE_SIZE;
+    }
+    void insert(int key) {
+        int index = hashFunction(key);
+        table[index].push_back(key);
+    }
+    bool search(int key) {
+        int index = hashFunction(key);
+        for (int val : table[index]) {
+            if (val == key) return true;
+        }
+        return false;
+    }
+    void remove(int key) {
+        int index = hashFunction(key);
+        table[index].remove(key);
+    }
+};
+```
+
+---
+
+##Hash Map
+
+- Implementation of a hash table.
+
+**Time**:
+- O(n) for collisions
+- O(1) otherwise
+
+**Space**: O(n)
+
+```cpp
+#include <unordered_map> // A Hash Table
+
+std::unordered_map<int, std::string> hashMap;
+```
+
+---
+
+**Dictionaries**:
+- Collection of key-value pairs.
+- Keys are unique.
+
+**Time**:
+- O(n) for collisions
+- O(1) otherwise
+
+**Space**: O(n)
+
+```cpp
+#include <map> // A balanced BST, not a Hash Table
+
+std::map<int, std::string> dict;
+dict[1] = "one";
+```
