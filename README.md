@@ -205,6 +205,22 @@ std::unordered_map<int, std::string> hashMap;
 
 ---
 
+## Hash Set
+
+- **Description**: Implementation of a hash table. Uses less memory than a hash map since no mappings.
+- **Time**:
+   - O(n) for collisions (bucket hashing)
+   - O(1) otherwise
+- **Space**: O(n)
+
+```cpp
+#include <unordered_set>
+
+std::unordered_set<int> hashSet;
+```
+
+---
+
 ## Dictionary
 - **Definition**: Collection of key-value pairs where keys are unique.
 - **Time**:
