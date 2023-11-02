@@ -14,7 +14,9 @@
 
 6. [Hash Map](#hash-map)
 
-7. [Dictionary](#dictionary)
+7. [Hash Set](#hash-set)
+
+8. [Dictionary](#dictionary)
 
 ---
 
