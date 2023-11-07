@@ -448,8 +448,8 @@ public:
 
 ### Removal
 
-1. Search for the node to be removed.
-2. Cases for deletion:
+- Search for the node to be removed.
+- Cases for deletion:
    - Leaf Node: Can simply be removed.
    - One Child: If the node has one child, we replace the node with its child.
    - Two Children: If the node has two children, find the **in-order predecessor** (right-most node of the left subtree) and then delete it.
