@@ -23,6 +23,7 @@
    - 9.2 [Right Rotation (Left-Left Case)](#right-rotation-left-left-case)
    - 9.3 [Left-Right Rotation](#left-right-rotation)
    - 9.4 [Right-Left Rotation](#right-left-rotation)
+   - 9.5 [Multiple Rotations](#multiple-rotations)
 
 ---
 
@@ -328,3 +329,7 @@ Node* rightLeftRotate(Node* z) {
     return leftRotate(z);
 }
 ```
+
+### Multiple Rotations
+1. If a subtree needs a **left rotation** to bring it into balance, first check the balance factor of the right child. If the right child is **left heavy** then do a **right rotation** on right child, followed by the original left rotation.
+2. If a subtree needs a **right rotation** to bring it into balance, first check the balance factor of the left child. If the **left child** is **right heavy** then do a **left rotation** on the left child, followed by the original right rotation.
