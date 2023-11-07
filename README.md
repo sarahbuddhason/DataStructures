@@ -333,3 +333,122 @@ Node* rightLeftRotate(Node* z) {
 ### Multiple Rotations
 1. If a subtree needs a **left rotation** to bring it into balance, first check the balance factor of the right child. If the right child is **left heavy** then do a **right rotation** on right child, followed by the original left rotation.
 2. If a subtree needs a **right rotation** to bring it into balance, first check the balance factor of the left child. If the **left child** is **right heavy** then do a **left rotation** on the left child, followed by the original right rotation.
+
+### Insertion
+
+```cpp
+#include <iostream>
+#include <algorithm>
+
+class Node {
+public:
+    int key;
+    Node* left;
+    Node* right;
+    int height;
+
+    Node(int k) : key(k), left(nullptr), right(nullptr), height(1) {}
+};
+
+class AVLTree {
+public:
+    // Utility: height of the tree
+    int height(Node* N) {
+        if (N == nullptr)
+            return 0;
+        return N->height;
+    }
+
+    // Utility: calculate the balance factor of a node
+    int getBalance(Node* N) {
+        if (N == nullptr)
+            return 0;
+        return height(N->right) - height(N->left);
+    }
+
+    Node* rightRotate(Node* root) {
+        Node* new_root = root->left;
+        Node* new_left = new_root->right;
+
+        // Perform rotation
+        new_root->right = root;
+        root->left = new_left;
+
+        // Update heights
+        root->height = std::max(height(root->left), height(root->right)) + 1;
+        new_root->height = std::max(height(new_root->left), height(new_root->right)) + 1;
+
+        // Return new root
+        return new_root;
+    }
+
+    Node* leftRotate(Node* root) {
+        Node* new_root = root->right;
+        Node* new_right = new_root->left;
+
+        // Perform rotation
+        new_root->left = root;
+        root->right = new_right;
+
+        // Update heights
+        root->height = std::max(height(root->left), height(root->right)) + 1;
+        new_root->height = std::max(height(new_root->left), height(new_root->right)) + 1;
+
+        // Return new root
+        return new_root;
+    }
+
+    Node* insert(Node* node, int key) {
+        // Perform the normal BST insertion
+        if (node == nullptr)
+            return (new Node(key));
+
+        if (key < node->key)
+            node->left = insert(node->left, key);
+        else if (key > node->key)
+            node->right = insert(node->right, key);
+        else
+            return node;
+
+        // Update the balance factor of this ancestor node
+        node->height = std::max(height(node->left), height(node->right)) + 1;
+        int balance = getBalance(node);
+
+        // If this node becomes unbalanced, then there are 4 cases
+
+        // Left Left Case
+        if (balance < -1 && key < node->left->key)
+            return rightRotate(node);
+
+        // Right Right Case
+        if (balance > 1 && key > node->right->key)
+            return leftRotate(node);
+
+        // Left Right Case
+        // Node inserted into right subtree of left child of unbalanced node
+        if (balance < -1 && key > node->left->key) {
+            node->left = leftRotate(node->left);
+            return rightRotate(node);
+        }
+
+        // Right Left Case
+        // Node inserted into left subtree of right child of unbalanced node
+        if (balance > 1 && key < node->right->key) {
+            node->right = rightRotate(node->right);
+            return leftRotate(node);
+        }
+
+        // Return the (unchanged) node pointer
+        return node;
+    }
+
+    // A utility function to print the preorder traversal of the tree
+    void preOrder(Node* root) {
+        if (root != nullptr) {
+            std::cout << root->key << " ";
+            preOrder(root->left);
+            preOrder(root->right);
+        }
+    }
+};
+```
