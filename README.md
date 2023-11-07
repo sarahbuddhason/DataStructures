@@ -24,6 +24,7 @@
    - 9.3 [Left-Right Rotation](#left-right-rotation)
    - 9.4 [Right-Left Rotation](#right-left-rotation)
    - 9.5 [Multiple Rotations](#multiple-rotations)
+   - 9.6 [Insertion](#insertion)
 
 ---
 
