@@ -464,7 +464,6 @@ Node* findInOrderPredecessor(Node* node) {
 }
 
 Node* deleteNode(Node* root, int key) {
-    // STEP 1: Perform the normal BST delete
     if (root == nullptr) return root;
 
     if (key < root->key) {
@@ -505,11 +504,11 @@ Node* deleteNode(Node* root, int key) {
     // If the tree had only one node, return it
     if (root == nullptr) return root;
 
-    // STEP 2: Update the height of the current node
+    // Update the height of the current node
 
-    // STEP 3: Get the balance factor of this node
+    // Get the balance factor of this node
 
-    // STEP 4: Handle rotation (4 cases) if the node is unbalanced
+    // Handle rotation (4 cases) if the node is unbalanced
 
     return root;
 }
