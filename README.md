@@ -18,6 +18,12 @@
 
 8. [Dictionary](#dictionary)
 
+9. [AVL Tree](#avl-tree)
+   - 9.1 [Left Rotation (Right-Right Case)](#left-rotation-right-right-case)
+   - 9.2 [Right Rotation (Left-Left Case)](#right-rotation-left-left-case)
+   - 9.3 [Left-Right Rotation](#left-right-rotation)
+   - 9.4 [Right-Left Rotation](#right-left-rotation)
+
 ---
 
 ## Graph
@@ -235,4 +241,90 @@ std::unordered_set<int> hashSet;
 
 std::map<int, std::string> dict;
 dict[1] = "one";
+```
+
+---
+
+## AVL Tree
+
+AVL trees are a type of self-balancing binary search tree. In an AVL tree, the heights of the two child subtrees of any node differ by at most one; if at any time they differ by more than one, rebalancing is done to restore this property.
+
+The balance of a node is defined as the height of its right subtree minus the height of its left subtree. A node with balance +1, 0, or -1 is considered balanced. A node with balance +2 or -2 is unbalanced and requires rebalancing.
+
+Here are the operations used to maintain the AVL property:
+
+### Left Rotation (Right-Right Case)
+A left rotation is used when a right-heavy subtree needs to be balanced, where the right child has a balance of 0 or +1 (right-right case).
+
+1. The right child of the unbalanced node becomes the new root of the subtree.
+2. The unbalanced node becomes the left child of the new root.
+3. If the new root had a left child, it becomes the right child of the unbalanced node.
+
+```cpp
+Node* leftRotate(Node* x) {
+    Node* y = x->right;
+    Node* T2 = y->left;
+
+    // Perform rotation
+    y->left = x;
+    x->right = T2;
+
+    // Update heights
+    x->height = max(height(x->left), height(x->right)) + 1;
+    y->height = max(height(y->left), height(y->right)) + 1;
+
+    // Return new root
+    return y;
+}
+```
+
+### Right Rotation (Left-Left Case)
+A right rotation is used when a left-heavy subtree needs to be balanced, where the left child has a balance of 0 or -1 (left-left case).
+
+1. The left child of the unbalanced node becomes the new root of the subtree.
+2. The unbalanced node becomes the right child of the new root.
+3. If the new root had a right child, it becomes the left child of the unbalanced node.
+
+```cpp
+Node* rightRotate(Node* y) {
+    Node* x = y->left;
+    Node* T2 = x->right;
+
+    // Perform rotation
+    x->right = y;
+    y->left = T2;
+
+    // Update heights
+    y->height = max(height(y->left), height(y->right)) + 1;
+    x->height = max(height(x->left), height(x->right)) + 1;
+
+    // Return new root
+    return x;
+}
+```
+
+### Left-Right Rotation
+A left-right rotation is a double rotation for the case when the left child of the unbalanced node has a right-heavy subtree. It is a combination of a left rotation on the left child, followed by a right rotation on the unbalanced node.
+
+1. Perform a left rotation on the left child of the unbalanced node.
+2. Perform a right rotation on the unbalanced node.
+
+```cpp
+Node* leftRightRotate(Node* z) {
+    z->left = leftRotate(z->left);
+    return rightRotate(z);
+}
+```
+
+### Right-Left Rotation
+A right-left rotation is a double rotation for the case when the right child of the unbalanced node has a left-heavy subtree. It is a combination of a right rotation on the right child, followed by a left rotation on the unbalanced node.
+
+1. Perform a right rotation on the right child of the unbalanced node.
+2. Perform a left rotation on the unbalanced node.
+
+```cpp
+Node* rightLeftRotate(Node* z) {
+    z->right = rightRotate(z->right);
+    return leftRotate(z);
+}
 ```
