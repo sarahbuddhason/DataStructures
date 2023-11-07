@@ -425,14 +425,14 @@ public:
             return leftRotate(node);
 
         // Left Right Case
-        // Node inserted into right subtree of left child of unbalanced node
+        // Node inserted into right subtree of LC of node
         if (balance < -1 && key > node->left->key) {
             node->left = leftRotate(node->left);
             return rightRotate(node);
         }
 
         // Right Left Case
-        // Node inserted into left subtree of right child of unbalanced node
+        // Insertion into left subtree of RC of node
         if (balance > 1 && key < node->right->key) {
             node->right = rightRotate(node->right);
             return leftRotate(node);
@@ -440,15 +440,6 @@ public:
 
         // Return the (unchanged) node pointer
         return node;
-    }
-
-    // A utility function to print the preorder traversal of the tree
-    void preOrder(Node* root) {
-        if (root != nullptr) {
-            std::cout << root->key << " ";
-            preOrder(root->left);
-            preOrder(root->right);
-        }
     }
 };
 ```
