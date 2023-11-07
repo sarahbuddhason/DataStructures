@@ -253,7 +253,7 @@ AVL trees are a type of self-balancing binary search tree. In an AVL tree, the h
 
 The balance of a node is defined as the height of its right subtree minus the height of its left subtree. A node with balance +1, 0, or -1 is considered balanced. A node with balance +2 or -2 is unbalanced and requires rebalancing.
 
-Here are the operations used to maintain the AVL property:
+**Operations used to maintain the AVL property:**
 
 ### Left Rotation (Right-Right Case)
 A left rotation is used when a right-heavy subtree needs to be balanced, where the right child has a balance of 0 or +1 (right-right case).
@@ -443,4 +443,73 @@ public:
         return node;
     }
 };
+```
+
+### Removal
+
+1. Search for the node to be removed.
+2. Cases for deletion:
+   - Leaf Node: Can simply be removed.
+   - One Child: If the node has one child, we replace the node with its child.
+   - Two Children: If the node has two children, find the **in-order predecessor** (right-most node of the left subtree) and then delete it.
+
+```cpp
+Node* findInOrderPredecessor(Node* node) {
+    Node* current = node->left;
+    while (current->right != nullptr) {
+        current = current->right;
+    }
+    return current;
+}
+
+Node* deleteNode(Node* root, int key) {
+    // STEP 1: Perform the normal BST delete
+    if (root == nullptr) return root;
+
+    if (key < root->key) {
+        // If the key to be deleted is smaller than the root's key, go to left subtree
+        root->left = deleteNode(root->left, key);
+    } else if (key > root->key) {
+        // If the key to be deleted is larger than the root's key, go to right subtree
+        root->right = deleteNode(root->right, key);
+    } else {
+        // This is the node to be deleted
+
+        // Node with only one child or no child
+        if ((root->left == nullptr) || (root->right == nullptr)) {
+            Node* temp = root->left ? root->left : root->right;
+
+            // No child case
+            if (temp == nullptr) {
+                temp = root;
+                root = nullptr;
+            } else {
+                // One child case
+                *root = *temp; // Copy the contents of the non-empty child
+            }
+
+            delete temp;
+        } else {
+            // Node with two children: get the in-order predecessor (largest in the left subtree)
+            Node* temp = findInOrderPredecessor(root);
+
+            // Copy the in-order predecessor's data to this node
+            root->key = temp->key;
+
+            // Delete the in-order predecessor
+            root->left = deleteNode(root->left, temp->key);
+        }
+    }
+
+    // If the tree had only one node, return it
+    if (root == nullptr) return root;
+
+    // STEP 2: Update the height of the current node
+
+    // STEP 3: Get the balance factor of this node
+
+    // STEP 4: Handle rotation (4 cases) if the node is unbalanced
+
+    return root;
+}
 ```
