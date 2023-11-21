@@ -26,6 +26,8 @@
    - 9.5 [Multiple Rotations](#multiple-rotations)
    - 9.6 [Insertion](#insertion)
    - 9.7 [Removal](#removal)
+  
+10. [Threaded Binary Trees](#threaded-binary-trees)
 
 ---
 
@@ -513,3 +515,17 @@ Node* deleteNode(Node* root, int key) {
     return root;
 }
 ```
+
+---
+
+## Threaded Binary Trees
+
+Threaded Binary Trees are an enhanced form of binary trees where `null` pointers are used to store references to the in-order predecessor and successor. This modification allows in-order traversal of the binary tree without recursion or stack (i.e., Morris Traversal).
+
+### Types
+- **Single Threaded**: Only one of the `null` pointers is used (either left or right).
+- **Double Threaded**: Both `null` pointers are used to store predecessor and successor.
+
+### Advantages
+- Efficient traversal operations.
+- Reduced memory usage as all `null` pointers are utilized.
