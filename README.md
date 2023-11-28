@@ -554,7 +554,7 @@ Node* deleteNode(Node* root, int key) {
 - Prevents issues arising from shared data but is more resource-intensive.
 - Requires explicit definition in C++.
 
-```
+```cpp
 class Node {
 public:
     int key;
