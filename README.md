@@ -514,11 +514,30 @@ Node* deleteNode(Node* root, int key) {
     // If the tree had only one node, return it
     if (root == nullptr) return root;
 
-    // Update the height of the current node
+    // Update height
+    root->height = 1 + std::max(height(root->left), height(root->right));
 
-    // Get the balance factor of this node
+    int balance = getBalance(root);
 
-    // Handle rotation (4 cases) if the node is unbalanced
+    // Left Rotate
+    if (balance < -1 && getBalance(root->right) <= 0)
+        return leftRotate(root);
+
+    // Right Rotate
+    if (balance > 1 && getBalance(root->left) >= 0)
+        return rightRotate(root);
+
+    // Left-Right Rotate
+    if (balance > 1 && getBalance(root->left) < 0) {
+        root->left = leftRotate(root->left);
+        return rightRotate(root);
+    }
+
+    // Right-Left Rotate
+    if (balance < -1 && getBalance(root->right) > 0) {
+        root->right = rightRotate(root->right);
+        return leftRotate(root);
+    }
 
     return root;
 }
