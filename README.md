@@ -29,6 +29,8 @@
   
 10. [Threaded Binary Trees](#threaded-binary-trees)
 
+11. [Shallow and Deep Copies](#shallow-and-deep-copies)
+
 ---
 
 ## Graph
@@ -526,7 +528,8 @@ Node* deleteNode(Node* root, int key) {
 
 ## Threaded Binary Trees
 
-Threaded Binary Trees are an enhanced form of binary trees where `null` pointers are used to store references to the in-order predecessor and successor. This modification allows in-order traversal of the binary tree without recursion or stack (i.e., Morris Traversal).
+- Enhanced form of binary trees where `null` pointers are used to store references to the in-order predecessor and successor
+- Allows in-order traversal of the binary tree without recursion or stack (i.e., Morris Traversal)
 
 ### Types
 - **Single Threaded**: Only one of the `null` pointers is used (either left or right).
@@ -535,3 +538,37 @@ Threaded Binary Trees are an enhanced form of binary trees where `null` pointers
 ### Advantages
 - Efficient traversal operations.
 - Reduced memory usage as all `null` pointers are utilized.
+
+---
+
+## Shallow and Deep Copies
+
+### Definitions
+- **Shallow**: Copies an object's pointers, not the actual data they point to. Both original and copy reference the same data, leading to potential issues like double free errors. Default behavior in C++ copy constructors and assignment operators.
+- **Deep**: Copies both the object and the actual data it points to, resulting in two completely independent objects. Prevents issues arising from shared data but is more resource-intensive. Requires explicit definition in C++.
+
+```
+class Node {
+public:
+    int key;
+    Node* left;
+    Node* right;
+    int height;
+
+    // Constructor
+    Node(int k) : key(k), left(nullptr), right(nullptr), height(1) {}
+
+    // Shallow Copy Constructor
+    Node(const Node &source) : key(source.key), left(source.left), right(source.right), height(source.height) {}
+
+    // Deep Copy
+    Node* deepCopy(const Node* source) {
+        if (source == nullptr) return nullptr;
+        Node* newNode = new Node(source->key);
+        newNode->left = deepCopy(source->left);
+        newNode->right = deepCopy(source->right);
+        newNode->height = source->height;
+        return newNode;
+    }
+};
+```
