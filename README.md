@@ -266,20 +266,20 @@ A left rotation is used when a right-heavy subtree needs to be balanced, where t
 3. If the new root had a left child, it becomes the right child of the unbalanced node.
 
 ```cpp
-Node* leftRotate(Node* x) {
-    Node* y = x->right;
-    Node* T2 = y->left;
+Node* leftRotate(Node* currentNode) {
+    Node* newRoot = currentNode->right;
+    Node* leftSubtreeOfNewRoot = newRoot->left;
 
     // Perform rotation
-    y->left = x;
-    x->right = T2;
+    newRoot->left = currentNode;
+    currentNode->right = leftSubtreeOfNewRoot;
 
     // Update heights
-    x->height = max(height(x->left), height(x->right)) + 1;
-    y->height = max(height(y->left), height(y->right)) + 1;
+    currentNode->height = max(height(currentNode->left), height(currentNode->right)) + 1;
+    newRoot->height = max(height(newRoot->left), height(newRoot->right)) + 1;
 
     // Return new root
-    return y;
+    return newRoot;
 }
 ```
 
@@ -291,20 +291,20 @@ A right rotation is used when a left-heavy subtree needs to be balanced, where t
 3. If the new root had a right child, it becomes the left child of the unbalanced node.
 
 ```cpp
-Node* rightRotate(Node* y) {
-    Node* x = y->left;
-    Node* T2 = x->right;
+Node* rightRotate(Node* currentNode) {
+    Node* newRoot = currentNode->left;
+    Node* rightSubtreeOfNewRoot = newRoot->right;
 
     // Perform rotation
-    x->right = y;
-    y->left = T2;
+    newRoot->right = currentNode;
+    currentNode->left = rightSubtreeOfNewRoot;
 
     // Update heights
-    y->height = max(height(y->left), height(y->right)) + 1;
-    x->height = max(height(x->left), height(x->right)) + 1;
+    currentNode->height = max(height(currentNode->left), height(currentNode->right)) + 1;
+    newRoot->height = max(height(newRoot->left), height(newRoot->right)) + 1;
 
     // Return new root
-    return x;
+    return newRoot;
 }
 ```
 
@@ -315,9 +315,12 @@ A left-right rotation is a double rotation for the case when the left child of t
 2. Perform a right rotation on the unbalanced node.
 
 ```cpp
-Node* leftRightRotate(Node* z) {
-    z->left = leftRotate(z->left);
-    return rightRotate(z);
+Node* leftRightRotate(Node* currentRoot) {
+    // First, a left rotation on the left child of the current root
+    currentRoot->left = leftRotate(currentRoot->left);
+    
+    // Then, a right rotation on the current root
+    return rightRotate(currentRoot);
 }
 ```
 
@@ -328,9 +331,12 @@ A right-left rotation is a double rotation for the case when the right child of 
 2. Perform a left rotation on the unbalanced node.
 
 ```cpp
-Node* rightLeftRotate(Node* z) {
-    z->right = rightRotate(z->right);
-    return leftRotate(z);
+Node* rightLeftRotate(Node* currentRoot) {
+    // First, a right rotation on the right child of the current root
+    currentRoot->right = rightRotate(currentRoot->right);
+    
+    // Then, a left rotation on the current root
+    return leftRotate(currentRoot);
 }
 ```
 
